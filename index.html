@@ -12,76 +12,79 @@
 <body>
   <div id="app">
     <section class="main">
-      <div class="addMenu">
-        <form class="addMenu__items">
-          <input 
-          autofocus 
-          autocomplete="off" 
-          class="addMenu__text" 
-          type="text" 
-          placeholder="Title..." 
-          v-model="newToDoTitle"
-          >
-          <button 
-          class="add__button"
-          type="button"
-          v-on:click="addButton"
-          >Add</button>
-        </form><!-- /.addMenu__items --> 
-      </div><!-- /.addMenu -->
+      <div class="wrapper">
 
-      <div class="listWrapper">
-        <ul id="lists" class="list__items">
-
-          <li class="list__item" v-for="(toDo, index) in filteredToDos">
+        <div class="addMenu">
+          <form class="addMenu__items">
             <input 
-            class="list__item__checkbox" 
-            type="checkbox" 
-            v-model="toDo.completed"
+            autofocus 
+            autocomplete="off" 
+            class="addMenu__text" 
+            type="text" 
+            placeholder="Title..." 
+            v-model="newToDoTitle"
             >
-            <label v-bind:class="{completed: toDo.completed}">
-              {{ toDo.title }}
-            </label>
             <button 
-            class="deleted" 
-            v-on:click="deletedToDo(index)">
+            class="add__button"
+            type="button"
+            v-on:click="addButton"
+            >Add</button>
+          </form><!-- /.addMenu__items --> 
+        </div><!-- /.addMenu -->
+  
+        <div class="listWrapper">
+          <ul id="lists" class="list__items">
+  
+            <li class="list__item" v-for="(toDo, index) in filteredToDos">
+              <input 
+              class="list__item__checkbox" 
+              type="checkbox" 
+              v-model="toDo.completed"
+              >
+              <label v-bind:class="{completed: toDo.completed}">
+                {{ toDo.title }}
+              </label>
+              <button 
+              class="deleted" 
+              v-on:click="deletedToDo(index)">
+              </button>
+            </li><!-- /.__list__item -->      
+                
+          </ul><!-- /.list__items -->
+        </div><!-- /.listWrapper -->
+  
+        <div class="bottom">
+          <div class="bottom__count">
+            <span>{{toDos.length}}</span> {{toDos.length | pluralize}} left
+          </div><!-- /.bottom__count -->
+          <div class="bottom__buttonWrapper">
+            <button 
+            class="bottom__button" 
+            type="button"
+            v-bind:class="{selected: filter == 'all'}"
+            v-on:click="filter = 'all'" 
+            >
+            All
             </button>
-          </li><!-- /.__list__item -->      
-              
-        </ul><!-- /.list__items -->
-      </div><!-- /.listWrapper -->
-
-      <div class="bottom">
-        <div class="bottom__count">
-          <span>{{toDos.length}}</span> {{toDos.length | pluralize}} left
-        </div><!-- /.bottom__count -->
-        <div class="bottom__buttonWrapper">
-          <button 
-          class="bottom__button" 
-          type="button"
-          v-bind:class="{selected: filter == 'all'}"
-          v-on:click="filter = 'all'" 
-          >
-          All
+            <button 
+            class="bottom__button"
+            type="button"
+            v-bind:class="{selected: filter == 'active'}"
+            v-on:click="filter = 'active'" 
+            >
+            Active
+            </button>
+            <button 
+            class="bottom__button"
+            type="button"
+            v-bind:class="{selected: filter == 'completed'}"
+            v-on:click="filter = 'completed'" 
+            >
+            Completed
           </button>
-          <button 
-          class="bottom__button"
-          type="button"
-          v-bind:class="{selected: filter == 'active'}"
-          v-on:click="filter = 'active'" 
-          >
-          Active
-          </button>
-          <button 
-          class="bottom__button"
-          type="button"
-          v-bind:class="{selected: filter == 'completed'}"
-          v-on:click="filter = 'completed'" 
-          >
-          Completed
-        </button>
-        </div><!-- /.bottom__buttonWrapper -->
-      </div><!-- /.bottom -->
+          </div><!-- /.bottom__buttonWrapper -->
+        </div><!-- /.bottom -->
+      </div><!-- /.wrapper -->
     </section><!-- /.main -->
   </div><!-- /#app -->
 

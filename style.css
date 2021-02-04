@@ -12,6 +12,7 @@ input, button {
 }
 
 body {
+  background-color: #ffe5e5;
   color: #444444;
   font-family: 'Open Sans', sans-serif;
   margin: 0 auto;
@@ -21,7 +22,12 @@ body {
 
 /* main */
 .main {
+  margin: 10px;
+}
+
+.wrapper{
   box-shadow: 0 0 4px rgb(197, 197, 197);
+  background-color: white;
   margin: 100px auto; 
 }
 
