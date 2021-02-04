@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+  <script src="./vue.js"></script>
+  <title>TO DO LIST</title>
+</head>
+<body>
+  <div id="app">
+    <section class="main">
+      <div class="addMenu">
+
+        <form class="addMenu__items">
+          <input type="text" class="addMenu__text" autofocus autocomplete="off" placeholder="Title..." v-on:keyup.enter="addtodo" v-model="newtodotitle">
+        </form><!-- /.addMenu__items --> 
+
+      </div><!-- /.addMenu -->
+
+      <div class="listWrapper">
+        <ul id="lists" class="list__items">
+
+          <li class="list__item" v-for="todo in todos">
+            <input class="list__item__checkbox" type="checkbox" id="scales" name="scales"
+            checked>
+            <label for="scales">{{ todo.title }}</label>
+          </li><!-- /.__list__item -->      
+              
+        </ul><!-- /.list__items -->
+      </div><!-- /.listWrapper -->
+    </section><!-- /.main -->
+  </div><!-- /#app -->
+
+
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        newtodotitle: null,
+        todos: [
+          {title: 'test'},
+          {title: 'test'},
+          {title: 'test'},
+        ] 
+      },
+
+      methods: {
+        addtodo() {
+          this.todos.push({title: this.newtodotitle});
+        }
+      }
+    });
+    
+
+  </script>
+
+<script src="https://kit.fontawesome.com/59f9f0717a.js" crossorigin="anonymous"></script>
+</body>
+</html>
