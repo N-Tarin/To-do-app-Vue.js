@@ -13,20 +13,30 @@
   <div id="app">
     <section class="main">
       <div class="addMenu">
-
         <form class="addMenu__items">
-          <input type="text" class="addMenu__text" autofocus autocomplete="off" placeholder="Title..." v-on:keyup.enter="addtodo" v-model="newtodotitle">
+          <input 
+          autofocus 
+          autocomplete="off" 
+          class="addMenu__text" 
+          type="text" 
+          placeholder="Title..." 
+          v-on:keyup.enter="addToDo" 
+          v-model="newToDoTitle"
+          >
         </form><!-- /.addMenu__items --> 
-
       </div><!-- /.addMenu -->
 
       <div class="listWrapper">
         <ul id="lists" class="list__items">
 
-          <li class="list__item" v-for="todo in todos">
-            <input class="list__item__checkbox" type="checkbox" id="scales" name="scales"
-            checked>
-            <label for="scales">{{ todo.title }}</label>
+          <li class="list__item" v-for="toDo in toDos">
+            <input 
+            class="list__item__checkbox" 
+            id="scales" 
+            name="scales"
+            type="checkbox" 
+            >
+            <label for="scales">{{ toDo.title }}</label>
           </li><!-- /.__list__item -->      
               
         </ul><!-- /.list__items -->
@@ -39,8 +49,8 @@
     let app = new Vue({
       el: '#app',
       data: {
-        newtodotitle: null,
-        todos: [
+        newToDoTitle: null,
+        toDos: [
           {title: 'test'},
           {title: 'test'},
           {title: 'test'},
@@ -48,8 +58,8 @@
       },
 
       methods: {
-        addtodo() {
-          this.todos.push({title: this.newtodotitle});
+        addToDo() {
+          this.toDos.push({title: this.newToDoTitle});
         }
       }
     });
