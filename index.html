@@ -20,27 +20,68 @@
           class="addMenu__text" 
           type="text" 
           placeholder="Title..." 
-          v-on:keyup.enter="addToDo" 
           v-model="newToDoTitle"
           >
+          <button 
+          class="add__button"
+          type="button"
+          v-on:click="addButton"
+          >Add</button>
         </form><!-- /.addMenu__items --> 
       </div><!-- /.addMenu -->
 
       <div class="listWrapper">
         <ul id="lists" class="list__items">
 
-          <li class="list__item" v-for="toDo in toDos">
+          <li class="list__item" v-for="(toDo, index) in filteredToDos">
             <input 
             class="list__item__checkbox" 
-            id="scales" 
-            name="scales"
             type="checkbox" 
+            v-model="toDo.completed"
             >
-            <label for="scales">{{ toDo.title }}</label>
+            <label v-bind:class="{completed: toDo.completed}">
+              {{ toDo.title }}
+            </label>
+            <button 
+            class="deleted" 
+            v-on:click="deletedToDo(index)">
+            </button>
           </li><!-- /.__list__item -->      
               
         </ul><!-- /.list__items -->
       </div><!-- /.listWrapper -->
+
+      <div class="bottom">
+        <div class="bottom__count">
+          <span>{{toDos.length}}</span> {{toDos.length | pluralize}} left
+        </div><!-- /.bottom__count -->
+        <div class="bottom__buttonWrapper">
+          <button 
+          class="bottom__button" 
+          type="button"
+          v-bind:class="{selected: filter == 'all'}"
+          v-on:click="filter = 'all'" 
+          >
+          All
+          </button>
+          <button 
+          class="bottom__button"
+          type="button"
+          v-bind:class="{selected: filter == 'active'}"
+          v-on:click="filter = 'active'" 
+          >
+          Active
+          </button>
+          <button 
+          class="bottom__button"
+          type="button"
+          v-bind:class="{selected: filter == 'completed'}"
+          v-on:click="filter = 'completed'" 
+          >
+          Completed
+        </button>
+        </div><!-- /.bottom__buttonWrapper -->
+      </div><!-- /.bottom -->
     </section><!-- /.main -->
   </div><!-- /#app -->
 
@@ -51,22 +92,52 @@
       data: {
         newToDoTitle: null,
         toDos: [
-          {title: 'test'},
-          {title: 'test'},
-          {title: 'test'},
-        ] 
+        ],
+        filter: 'all',
+      },
+
+      filters: {
+        pluralize(n) {
+          if (n === 1) {
+            return 'item'
+          } else {
+            return 'items'
+          }
+        }
       },
 
       methods: {
-        addToDo() {
-          this.toDos.push({title: this.newToDoTitle});
+        addButton() {
+          if(!this.newToDoTitle) {
+            return
+          } else {
+            this.toDos.push({title: this.newToDoTitle, completed: false});
+            this.newToDoTitle = null;
+          }
+        },
+        deletedToDo(index) {
+          this.toDos.splice(index, 1); //splice削除
         }
-      }
-    });
-    
+      },
 
+      computed: {
+        filteredToDos() {
+          if(this.filter === 'all') {
+            return this.toDos
+          } else if(this.filter === 'completed') {
+            return this.toDos.filter((toDo) => {
+              return toDo.completed
+            })
+          } else if(this.filter === 'active') {
+            return this.toDos.filter((toDo) => {
+              return !toDo.completed
+            })
+          }
+        }
+      },
+    });
   </script>
 
-<script src="https://kit.fontawesome.com/59f9f0717a.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/59f9f0717a.js" crossorigin="anonymous"></script>
 </body>
 </html>

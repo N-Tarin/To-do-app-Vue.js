@@ -29,7 +29,6 @@ body {
   border-bottom: 1px solid #d3d1d1;
   display: flex;
   margin: 5px 5px 0 5px;
-  padding: 5px 0;
   text-align: center;
 }
 
@@ -37,13 +36,29 @@ body {
   background-color: white;
   border: none;
   font-family: 'Nunito', sans-serif;
-  height: 40px;
+  font-size: 22px;
+  padding: 10px 0 10px 10px;
   width: 100%;
 }
 
 .addMenu__text::placeholder {
   color: #d3d1d1;
   padding-left: 10px;
+}
+
+.add__button {
+  color: white;
+  background-color: #2685f1;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  line-height: 43px;
+  padding: 0 10px;
+  margin: 3px 0;
+}
+
+.add__button:hover {
+  background-color: #005cc8;
 }
 
 .list__items {
@@ -64,7 +79,12 @@ body {
   width: 100%;
 }
 
+.list__item:hover {
+  background-color: rgb(250, 248, 248);
+}
+
 .list__item__checkbox {
+  background-color: #2685f1;
   border: 1px solid #444444;
   height: 30px;
   width: 30px;
@@ -73,4 +93,48 @@ body {
 .list__item label {
   line-height: 30px;
   padding: 0 0 0 20px;
+}
+
+.bottom {
+  color: #bdb9b9;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.bottom__button {
+  background-color: white;
+  border: 1px solid white;
+  color: #bdb9b9;
+  margin: 0 10px;
+  padding: 5px 7px;
+}
+
+.completed {
+  color: #d3d1d1;
+  text-decoration: line-through;
+}
+
+.deleted {
+  border: none;
+  margin: 0 10px 0 auto;
+}
+
+.deleted::after {
+  background-color: white;
+  color: #bdb9b9;
+  content: "×";
+  font-size: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+}
+
+.deleted:hover::after {
+  color: #2685f1;
+}
+
+.selected {
+  border: 1px solid #bdb9b9;
+  border-radius: 5px;
+  padding: 5px 7px;
 }
